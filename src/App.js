@@ -1,15 +1,35 @@
-import logo from './logo.svg';
+import React from 'react';
 import Todo from './Todo'
 import './App.css';
 
-function App() {
-  return (
-    <div className='App'>
-      <Todo />
-      <Todo />
+class App extends React.Component {
 
-    </div>
-  );
+  constructor(props){
+    super(props);
+    this.state = {
+        item:[
+          {id:0, title:"hello World", done: true},
+          {id:1, title:"hello World2", done: false} ,
+          {id:3, title:"소스코드를 고치면 알아서 해줍니다", done: false} 
+          //값을 배열로 받았으므로 배열로 내보낼 수 있게끔 코드를 짜야 함
+        ]
+    };  
+  }
+  render(){
+    var todoItems = this.state.item.map((item, idx)=>(
+      <Todo item={item} key={item.id} />
+    ))
+    //나는 item으로 하고 싶어서 this.state에 item만 넣어둠.
+    //map = 원소를 배열로 하나씩 바꿔줌
+    return (
+      <div className='App'>
+        {
+        /* todo 컴포넌트를 여러개로 만들어서 배열로 내보낼 수 있도록함 */
+        }
+        {todoItems}
+      </div>
+    );   
+  }
 }
-
+    
 export default App;
