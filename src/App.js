@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from './Todo'
 import './App.css';
+import {Paper, List} from "@material-ui/core"
 
 class App extends React.Component {
 
@@ -16,16 +17,20 @@ class App extends React.Component {
     };  
   }
   render(){
-    var todoItems = this.state.item.map((item, idx)=>(
-      <Todo item={item} key={item.id} />
-    ))
+    var todoItems = this.state.item.length >0 && (
+      <Paper style={{margin:16}}>
+        <List>
+          {this.state.item.map((item, idx)=> (
+            <Todo item={item} key={item.id}/>
+          ))}
+        </List>
+      </Paper>
+    );
     //나는 item으로 하고 싶어서 this.state에 item만 넣어둠.
     //map = 원소를 배열로 하나씩 바꿔줌
     return (
       <div className='App'>
-        {
-        /* todo 컴포넌트를 여러개로 만들어서 배열로 내보낼 수 있도록함 */
-        }
+        
         {todoItems}
       </div>
     );   
