@@ -2,13 +2,11 @@ import React from "react";
 
 import {ListItem, ListItemText, InputBase, Checkbox, ListItemSecondaryAction, IconButton} from "@material-ui/core"
 import { DeleteOutlineOutlined } from "@material-ui/icons/DeleteOutlineOutlined";
+import { DeleteOutlined } from "@material-ui/icons";
 class Todo extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            item : props.item,
-            readOnly:true
-        };
+        this.state = {item : props.item, readOnly:true        };
         this.delete=props.delete;
     }
     deleteEventHandler = () =>{
@@ -32,7 +30,7 @@ class Todo extends React.Component{
             this.setState({readOnly: true});
         }
     };
-    checkboxEventHandler = ()=>{
+    checkboxEventHandler = (e)=>{
         const thisItem = this.state.item;
         thisItem.done= !thisItem.done;
         this.setState({item:thisItem});
@@ -63,7 +61,7 @@ class Todo extends React.Component{
                 </ListItemText>
                 <ListItemSecondaryAction>
                     <IconButton aria-label="Delete Todo" onClick={this.deleteEventHandler}>
-                        <DeleteOutlineOutlined />
+                        <DeleteOutlined />
                     </IconButton>
                 </ListItemSecondaryAction>
             </ListItem>

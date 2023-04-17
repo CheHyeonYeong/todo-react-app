@@ -35,7 +35,7 @@ class App extends React.Component {
     const thisItem = this.state.item;
     console.log("Before delete", this.state.item); //test용 코드
     const newItem = thisItem.filter(e=> e.id !==item.id);
-    this.setState({items: newItem}, ()=> {
+    this.setState({item: newItem}, ()=> {
       console.log("After Delete : ", this.state.item);    
     });
     
