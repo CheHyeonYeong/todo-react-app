@@ -3,7 +3,7 @@ import Todo from './Todo';
 import AddTodo from './AddTodo.js';
 import './App.css';
 import {Paper, List, Container} from "@material-ui/core";
-
+import { call } from "./service/ApiService"
 
 class App extends React.Component { 
 
@@ -18,34 +18,36 @@ class App extends React.Component {
     };  
   }
 
-  //추가하고자 하는 item이 오면 setting 과정을 지나서 Additem에 아이템을 넣어준다.
+  
+  componentDidMount(){
+    call("/todo","GET",null).then((response)=>
+    this.setState({item: response.data}))
+  }
 
   add = (item) => {
-    const thisItem = this.state.item;
-    item.id="ID-" + thisItem.length; 
-    item.done = false;
-    thisItem.push(item);
-    this.setState({item:thisItem});
-    console.log("items : ", this.state.item);
+    call("/todo","POST",item).then((response)=>
+    this.setState({item: response.data})
+    );
   }
 
   delete = (item) =>{
-    //app.js에서 실제로 작용 -> delete는 app.js에서 해야 함
-    //props에서 받아서 넘겨주는 방식으로 간다.
-    const thisItem = this.state.item;
-    console.log("Before delete", this.state.item); //test용 코드
-    const newItem = thisItem.filter(e=> e.id !==item.id);
-    this.setState({item: newItem}, ()=> {
-      console.log("After Delete : ", this.state.item);    
-    });
-    
+    call("/todo","DELETE",item).then((response)=>
+    this.setState({item: response.data})
+    ); 
   }
+
+  update = (item)=>{
+    call("/todo", "PUT", item).then((response)=>
+    this.setState({item: response.data}))
+  }
+  
   render(){
     var todoItems = this.state.item.length > 0 && (
       <Paper style={{margin:16}}>
         <List>
           {this.state.item.map((item, id)=> (
-            <Todo item={item} key={item.id} delete={this.delete}/>
+            <Todo item={item} key={item.id} delete={this.delete}
+            update={this.update}/>
           ))}
         </List>
       </Paper>

@@ -1,13 +1,14 @@
 import React from "react";
 
 import {ListItem, ListItemText, InputBase, Checkbox, ListItemSecondaryAction, IconButton} from "@material-ui/core"
-import { DeleteOutlineOutlined } from "@material-ui/icons/DeleteOutlineOutlined";
 import { DeleteOutlined } from "@material-ui/icons";
 class Todo extends React.Component{
     constructor(props){
         super(props);
         this.state = {item : props.item, readOnly:true        };
         this.delete=props.delete;
+        this.update = props.update;
+        
     }
     deleteEventHandler = () =>{
         //app.js에서 실제로 작용 -> delete는 app.js에서 해야 함
@@ -23,17 +24,19 @@ class Todo extends React.Component{
     editEventHandler=(e)=>{
         const thisItem = this.state.item;
         thisItem.title = e.target.value;
-        thisItem.setState({item:thisItem});
+        this.setState({item: thisItem});
     };
     enterkeyEventHandler = (e) =>{
         if(e.key ==="Enter") {
             this.setState({readOnly: true});
+            this.update(this.state.item);
         }
     };
     checkboxEventHandler = (e)=>{
         const thisItem = this.state.item;
         thisItem.done= !thisItem.done;
         this.setState({item:thisItem});
+        this.update(this.state.item);
     };
     render(){
         const item= this.state.item;
