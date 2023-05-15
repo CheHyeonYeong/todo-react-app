@@ -54,6 +54,8 @@ class App extends React.Component {
     );
     //나는 item으로 하고 싶어서 this.state에 item만 넣어둠.
     //map = 원소를 배열로 하나씩 바꿔줌
+
+    
     return (
       <div className="App">
         <Container maxWidth="md">
