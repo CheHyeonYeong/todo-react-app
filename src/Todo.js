@@ -26,7 +26,7 @@ class Todo extends React.Component{
         thisItem.title = e.target.value;
         this.setState({item: thisItem});
     };
-    enterkeyEventHandler = (e) =>{
+    enterKeyEventHandler = (e) =>{
         if(e.key ==="Enter") {
             this.setState({readOnly: true});
             this.update(this.state.item);
@@ -58,7 +58,7 @@ class Todo extends React.Component{
                         fullWidth = {true}
                         onClick={this.offReadOnlyMode}
                         onChange={this.editEventHandler}
-                        onKeyPress={this.enterkeyEventHandler}
+                        onKeyPress={this.enterKeyEventHandler}
                     />
 
                 </ListItemText>
