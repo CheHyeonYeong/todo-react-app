@@ -19,26 +19,28 @@ class App extends React.Component {
   }
 
   
-  componentDidMount(){
-    call("/todo","GET",null).then((response)=>
-    this.setState({item: response.data}))
-  }
-
-  add = (item) => {
-    call("/todo","POST",item).then((response)=>
-    this.setState({item: response.data})
+  componentDidMount() {
+    call("/todo", "GET", null).then((response) =>
+      this.setState({ item: response.data })
     );
   }
 
-  delete = (item) =>{
-    call("/todo","DELETE",item).then((response)=>
-    this.setState({item: response.data})
-    ); 
+  add = (item) => {
+    call("/todo", "POST", item).then((response) =>
+      this.setState({ item: response.data })
+    );
   }
 
-  update = (item)=>{
-    call("/todo", "PUT", item).then((response)=>
-    this.setState({item: response.data}))
+  delete = (item) => {
+    call("/todo", "DELETE", item).then((response) =>
+      this.setState({ item: response.data })
+    );
+  }
+
+  update = (item) => {
+    call("/todo", "PUT", item).then((response) =>
+      this.setState({ item: response.data })
+    );
   }
   
   render(){
