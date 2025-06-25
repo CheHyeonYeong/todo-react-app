@@ -13,8 +13,8 @@ export function call(api, method, request) {
     options.body = JSON.stringify(request);
   }
 
-  return fetch(options.url, options).then((response) =>
-    response.json().then((json) => {
+  return fetch(options.url, options).then(response =>
+    response.json().then(json => {
       if (!response.ok) {
         return Promise.reject(json);
       }
